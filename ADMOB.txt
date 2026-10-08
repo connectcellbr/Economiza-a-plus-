@@ -1,0 +1,69 @@
+GOOGLE ADMOB — ECONOMIZA AI (APP FUTURO)
+========================================
+
+AdSense foi removido do projeto. O Render só hospeda a interface web.
+A monetização será via AdMob quando o app Android/iOS existir.
+
+IDs de produção
+---------------
+  App ID:
+  ca-app-pub-4786232214626239~7650986156
+
+  Ad Unit (banner / unidade principal):
+  ca-app-pub-4786232214626239/7263973345
+
+IDs de teste (use em debug — não invalidam a conta)
+----------------------------------------------------
+  App ID teste:   ca-app-pub-3940256099942544~3347511713
+  Banner teste:   ca-app-pub-3940256099942544/6300978111
+  Interstitial:   ca-app-pub-3940256099942544/1033173712
+
+
+ANDROID
+-------
+1) AndroidManifest.xml (dentro de <application>):
+
+   <meta-data
+       android:name="com.google.android.gms.ads.APPLICATION_ID"
+       android:value="ca-app-pub-4786232214626239~7650986156"/>
+
+2) build.gradle (módulo app):
+
+   implementation 'com.google.android.gms:play-services-ads:23.+'
+
+3) Banner (Kotlin):
+
+   val adView = AdView(this)
+   adView.adUnitId = "ca-app-pub-4786232214626239/7263973345"
+   adView.setAdSize(AdSize.BANNER)
+   adView.loadAd(AdRequest.Builder().build())
+
+4) Se o app for WebView carregando o Economiza AI:
+   - Banner nativo no topo/rodapé (fora do HTML)
+   - O HTML expõe window.ECONOMIZA_ADMOB com os IDs
+
+
+iOS
+---
+1) Info.plist:
+
+   <key>GADApplicationIdentifier</key>
+   <string>ca-app-pub-4786232214626239~7650986156</string>
+
+2) Banner com a mesma Ad Unit ID:
+   ca-app-pub-4786232214626239/7263973345
+
+
+CAPACITOR / CORDOVA (quando transformar em app)
+-----------------------------------------------
+- Instalar plugin AdMob (ex.: @capacitor-community/admob)
+- Inicializar com appId acima
+- Mostrar banner com bannerUnitId
+- No HTML, setar window.ECONOMIZA_ADMOB.enabled = true via bridge
+
+
+POLÍTICA
+--------
+- Não force clique em anúncio para buscar preço ou abrir "Ver oferta".
+- Em testes, use sempre os IDs de teste do Google.
+- App precisa estar cadastrado e em conformidade no AdMob Console.
